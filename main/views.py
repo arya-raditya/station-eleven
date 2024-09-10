@@ -4,12 +4,11 @@ def show_main(request):
     context = {
         'shop_name' : 'Station Eleven',
         'name' : 'Arya Raditya Kusuma',
-        'class' : 'PBP F'
+        'class' : 'PBP F',
 
-        # 'name' : 'Koka Kola',
-        # 'price': 5000,
-        # 'description': 'Soda berkandungan gula tinggi yang siap memaniskan harimu',
-        # 'stock' : 10
+        'nama_prod' : 'KokaKola',
+        'harga_prod' : 5000,
+        'deskripsi_prod' : 'soda dengan kandungan gula tinggi cocok utk pengidap diabetes'
     }
 
     return render(request, "main.html", context)
