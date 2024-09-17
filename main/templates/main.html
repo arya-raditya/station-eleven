@@ -1,5 +1,37 @@
-<h1><center><strong>{{ shop_name }}</strong></center></h1> 
-<h5><center>Oleh {{ name }} dari kelas {{ class }}</center></h5> 
+{% extends 'base.html' %}
+{% block content %}
 
-<h5>Nama Produk: {{ nama_prod }} - {{ harga_prod }}</h5> 
-<p> {{ deskripsi_prod }} </p>
+<h1>{{ shop_name }}</h1>
+<h5>Oleh {{ name }} dari kelas {{ class }}</h5>
+<p>Produk termurah siap dikirim ke mana pun Anda berada!</p>
+
+{% if not product_list %}
+<p>Station Eleven masih melakukan restock!</p>
+{% else %}
+<table>
+    <thead>
+    <tr>
+        <th>Nama Produk</th>
+        <th>Deskripsi</th>
+        <th>Harga</th>
+        <th>Stok</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in product_list %}
+        <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+<a href="{% url 'main:create_product_list' %}">
+<button>Add New Product</button>
+</a>
+
+{% endblock content %}
