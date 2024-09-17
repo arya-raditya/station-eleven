@@ -4,7 +4,11 @@
 
 => 
 Pertama, dimulai dengan membuat direktori baru di lokal dengan nama e-commerce yang ingin saya buat, yaitu station-eleven. Kemudian, pada direktori tersebut, diinstall requirements yang telah dilist di requirements.txt. Lalu, project Django diinisiasi dengan “django-admin startproject (nama project)”. Selanjutnya, pada settings.py, ditambahkan localhost ke allowed host.
+Pertama, dimulai dengan membuat direktori baru di lokal dengan nama e-commerce yang ingin saya buat, yaitu station-eleven. Kemudian, pada direktori tersebut, diinstall requirements yang telah dilist di requirements.txt. Lalu, project Django diinisiasi dengan “django-admin startproject (nama project)”. Selanjutnya, pada settings.py, ditambahkan localhost ke allowed host.
 
+Kemudian, aplikasi dengan nama main dibuat dengan menjalankan command “python manage.py startapp main”. Setelah berhasil dijalankan, folder dengan nama main akan otomatis dibuat. Untuk melakukan routing pada proyek agar dapat menjalankan aplikasi main, ditambahkan “main” pada installed apps di settings.py.
+
+Lalu, model pada aplikasi main diisi dengan atribut-atribut yang wajib diimplementasi, yaitu nama produk, harga, dan deskripsi. Saya juga menambahkan satu atribut tambahan berupa integer. Selanjutnya, saya membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikas, nama, dan kelas saya. Lalu, saya juga menambahkan contoh produk yang ingin saya tampilkan di e-commerce.
 Kemudian, aplikasi dengan nama main dibuat dengan menjalankan command “python manage.py startapp main”. Setelah berhasil dijalankan, folder dengan nama main akan otomatis dibuat. Untuk melakukan routing pada proyek agar dapat menjalankan aplikasi main, ditambahkan “main” pada installed apps di settings.py.
 
 Lalu, model pada aplikasi main diisi dengan atribut-atribut yang wajib diimplementasi, yaitu nama produk, harga, dan deskripsi. Saya juga menambahkan satu atribut tambahan berupa integer. Selanjutnya, saya membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikas, nama, dan kelas saya. Lalu, saya juga menambahkan contoh produk yang ingin saya tampilkan di e-commerce.
