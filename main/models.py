@@ -5,3 +5,8 @@ class Product(models.Model):
     price = models.IntegerField()
     description = models.TextField()
     stock = models.IntegerField()
+    
+class Person(models.Model):
+    name = models.CharField()
+    age = models.IntegerField()
+    ishappy = models.BooleanField()
