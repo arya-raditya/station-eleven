@@ -1,3 +1,53 @@
+# Tugas Week 3
+
+## Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+
+Data delivery dalam sebuah platform adalah proses pengiriman dan penerimaan data antara pengguna dan server. Proses ini penting karena memastikan bahwa data yang dimasukkan oleh pengguna bisa dikirim ke server untuk diproses, dan hasilnya bisa dikirim kembali ke pengguna. Ini dapat menjadi dasar dari interaksi antara pengguna dan aplikasi.
+
+Dalam Django, data delivery sering terjadi ketika pengguna mengisi form di web dan mengirimkannya. Form tersebut akan mengirimkan data ke server melalui request HTTP (biasanya POST atau GET). Django kemudian menerima data ini, memprosesnya, dan memberikan respons kembali kepada pengguna, dalam tugas ini, outputnya adalah menampilkan isian form dalam tabel.
+
+## Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+
+JSON (JavaScript Object Notation) dan XML (eXtensible Markup Language) adalah dua format yang digunakan untuk menyimpan dan mentransfer data. Meskipun keduanya memiliki fungsionalitas yang mirip, saya sendiri lebih menyukasi melihat data berformat JSON. Beberapa alasan yang melatarbelakangi hal ini di antaranya adalah kesederhanaan format yang lebih mudah dibaca jika dibandingkan dengan XML. 
+
+JSON bisa jadi lebih populer dari XML karena alasan yang sama, yaitu lebih sederhana, ringkas, dan mudah dibaca baik oleh manusia maupun mesin. Selain itu, JSON menghasilkan ukuran file yang lebih kecil, lebih cepat diparsing, dan lebih mudah diintegrasikan dengan bahasa pemrograman modern, terutama di lingkungan web. Selain itu, JSON lebih sesuai untuk kebutuhan data sederhana yang sering ditemui di API dan aplikasi web, sementara XML menawarkan kompleksitas yang biasanya tidak diperlukan dalam banyak kasus. Popularitas JSON juga didukung oleh penggunaannya yang luas dalam API REST dan teknologi web modern.
+
+## Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+
+Method is_valid() pada form Django digunakan untuk memvalidasi data yang dikirim oleh pengguna melalui form. Ketika pengguna mengisi form dan mengirimkannya, Django perlu memastikan bahwa data yang diterima sesuai dengan aturan atau kriteria yang telah ditetapkan. Dengan ini, data yang akan diproses oleh Django hanya data yang sudah dipastikan valid saja.
+
+## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+
+Kita membutuhkan csrf_token saat membuat form di Django untuk melindungi aplikasi dari serangan Cross-Site Request Forgery (CSRF). CSRF adalah jenis serangan di mana penyerang mencoba mengeksploitasi sesi autentikasi pengguna yang sudah login di sebuah situs web untuk melakukan aksi yang tidak diinginkan tanpa sepengetahuan pengguna.
+
+Jika form Django tidak menyertakan csrf_token, aplikasi akan menjadi rentan terhadap serangan CSRF. Penyerang dapat memanfaatkan sesi pengguna yang sedang login untuk mengirimkan permintaan berbahaya ke server tanpa sepengetahuan pengguna. Contohnya, penyerang bisa membuat form di situs mereka sendiri yang mengirimkan data ke server aplikasi yang kita buat, sehingga melakukan aksi seperti mengubah pengaturan akun, melakukan transfer dana, atau menghapus data penting. Tanpa perlindungan csrf_token, seorang penyerang dapat mengelabui pengguna yang sedang login dan melakukan tindakan illegal.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+=> Ada dua task utama yang perlu dikerjakan di minggu ketiga ini, yaitu menambahkan fungsionalitas forms dan menambahkan pengembalian data dalam XML dan JSON. 
+
+Pertama, untuk menambahkan forms, saya memulainya dari membenahi model. Setiap entri perlu memiliki primary key, sehingga saya membuat suatu atribut baru sebagai primary key pada model yang telah saya buat, yaitu UUID. Atribut ini dipastikan unik dan digenerate secara otomatis setiap ditambahkan entri baru. 
+
+Setelah itu, saya membuat sebuah file baru dengan nama "forms.py". Di dalam file ini saya mendefinisikan suatu class ProductForm yang dapat menerima entri produk baru. forms dan model yang telah dibuat ini diimport ke views.py. Dan di file ini pula, saya membuat suatu metode baru untuk meminta input produk dari user, yaitu create_product_list, dan dihubungkan dengan suatu template html create_product_list.html.
+
+Kemudian, saya memodifikasi sedikit fungsi show_main agar dapat menampilkan isian form, dengan menambahkan 'product_list': product_list ke dalam komponen dictionary. HTML utama (main.html) juga saya modifikasi dengan menambahkan suatu iterasi yang dapat mencetak isian dari form. Terakhir, saya memperbaiki routing di urls.py, dengan menambahkan path baru 'create_product_list' yang akan mendirect ke fungsi create_product_list.
+
+Tugas kedua adalah mengintegrasikan cara melihat data xml dan json. Untuk melakukan hal ini, di views.py saya mengimport HttpResponse dan serializers. Kemudian, saya membuat fungsi-fungsi untuk menunjukkan xml, json, xml by id, dan json by id. Setelahnya, dilakukan routing pada urls.py dengan mengimport fungsi-fungsi yang telah didefinisikan tadi, lalu menambah path yang bersesuaian.
+
+Berikut adalah hasil postmannya:
+
+Melihat data XML:
+![xml](./images/tugas3_xml.png)
+
+Melihat data JSON:
+![json](./images/tugas3_json.png)
+
+Melihat data XML by id:
+![xmlbyid](./images/tugas3_xmlbyid.png)
+
+Melihat data JSON by id:
+![jsonbyid](./images/tugas3_jsonbyid.png)
+
 # Tugas Week 2
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
