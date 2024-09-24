@@ -24,6 +24,14 @@ Setelah mengimplementasi authentication, selanjutnya dilakukan implementasi auth
 
 Kemudian, setelah setiap fungsi selesai dibuat, saya menambahkan html untik regist page dan login page, serta mengubungkan setiap fungsi yang baru dibuat di views.py ke urls.py. Setelahnya, dilakukan migration dan pengecekan apakah sudah dapat berjalan dengan baik di localhost. Setelah berhasil, dilakukan push ke github dan pws.
 
+Berikut merupakan bukti pembuatan 2 user dengan masing-masing 3 dummy data:
+
+User test2:
+![test2](./images/tugas4_1.png)
+
+User test3: 
+![test3](./images/tugas4_2.png)
+
 
 # Tugas Week 3
 
