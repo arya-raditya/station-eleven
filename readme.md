@@ -1,3 +1,30 @@
+# Tugas Week 4
+
+## Apa perbedaan antara HttpResponseRedirect() dan redirect()
+
+HttpResponseRedirect() dan redirect() di Django sama-sama digunakan untuk melakukan pengalihan (redirect) ke URL lain, namun perbedaannya terletak pada fleksibilitasnya. HttpResponseRedirect() membutuhkan URL lengkap atau relatif secara manual, sedangkan redirect() lebih fleksibel karena bisa menerima URL, nama URL pattern, atau objek model yang memiliki get_absolute_url(). Kelebihan redirect() adalah kemudahan dan fleksibilitas penggunaannya, sedangkan HttpResponseRedirect() lebih cocok jika URL sudah diketahui secara pasti.
+
+## Jelaskan cara kerja penghubungan model Product dengan User!
+
+Pada implementasi ini, digunakan ForeignKey untuk menghubungkan model Product dengan User. Penghubungan model Product dengan User menggunakan ForeignKey memungkinkan setiap Product terhubung ke satu User, sementara satu User bisa memiliki banyak Product. Implementasinya melibatkan menambahkan field user = models.ForeignKey(User, on_delete=models.CASCADE) di model Product, di mana on_delete=models.CASCADE memastikan produk terkait akan dihapus jika user dihapus. Ini mempermudah pengelolaan produk berdasarkan pengguna, misalnya dengan mengambil semua produk milik user tertentu menggunakan user.product_set.all(). Relasi ini cocok jika setiap produk hanya dimiliki oleh satu user.
+
+## Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+
+Authentication adalah proses memverifikasi identitas pengguna, seperti saat login dengan username dan password untuk memastikan pengguna sah. Authorization adalah proses menentukan apa yang boleh diakses atau dilakukan oleh pengguna setelah berhasil login, seperti memberi akses ke halaman tertentu. Di Django, authentication dilakukan dengan fungsi seperti authenticate() dan login(), sementara authorization diatur melalui izin (permissions) dan dekorator seperti @login_required, memastikan hanya pengguna yang sudah terotentikasi bisa mengakses area tertentu sesuai dengan haknya.
+
+## Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+
+Django mengingat pengguna yang telah login menggunakan cookies, khususnya session cookies, yang menyimpan session ID di browser setelah pengguna berhasil login. Setiap kali pengguna mengakses halaman, cookie ini dikirim kembali ke server, memungkinkan Django untuk memverifikasi identitas pengguna dan mempertahankan sesi mereka. Selain itu, cookies memiliki kegunaan lain seperti menyimpan preferensi pengguna, melacak aktivitas, dan personalisasi iklan. Namun, tidak semua cookies aman; risiko seperti cookies tidak terenkripsi, penyimpanan informasi sensitif, dan serangan XSS dapat mengancam keamanan. Namun, pada Django, Django membantu mengatasi risiko ini dengan menggunakan secure cookies dan HttpOnly cookies, tetapi pengembang perlu berhati-hati dalam pengelolaan dan perlindungan cookies.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+Dalam tugas kali ini, fokus yang hendak dilakukan adalah mengimplementasikan authentication dan authorization pada app yang hendak dibuat. Untuk mengimplementasi authentication, perlu dilakukan pengimplementasian register, login, dan logout. Saya mengimport fungsi UserCreationForm dan AuthenticationForm untuk memudahkan pembuatan. UserCreationForm digunakan ketika mengimplementasikan fungsi register, sehingga sistem akan otomatis membuat user baru setiap dilakukan register, kemudian AuthenticationForm digunakan pada fungsi login, sehingga user yang telah dibuat tadi bisa digunakan seterusnya. Selain itu, pada models.py, ditambahkan user = models.ForeignKey(User, on_delete=models.CASCADE) untuk menghubungkan setiap data yang diinput pada user bersangkutan.
+
+Setelah mengimplementasi authentication, selanjutnya dilakukan implementasi authorization. Hal ini dieksekusi dengan menambahkan decorator @login_required(login_url='/login') di fungsi show main. Fungsi ini  membuat setiap browser yang ingin mengakses show_main memerlukan user login terlebih dahulu, sehingga akan automatis ter-direct ke login page jika belum login. Hal ini merestriksi setiap browser yang hendak mencoba mengakses app, di mana apabila browser tersebut belum login menggunakan usernamenya, maka akses terhadap show_main akan dihalangi. Terdapat modifikasi pula pada product_list menjadi Product.objects.filter(user=request.user), sehingga user hanya bisa melihat produk yang mereka input sendiri.
+
+Kemudian, setelah setiap fungsi selesai dibuat, saya menambahkan html untik regist page dan login page, serta mengubungkan setiap fungsi yang baru dibuat di views.py ke urls.py. Setelahnya, dilakukan migration dan pengecekan apakah sudah dapat berjalan dengan baik di localhost. Setelah berhasil, dilakukan push ke github dan pws.
+
+
 # Tugas Week 3
 
 ## Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
@@ -47,6 +74,7 @@ Melihat data XML by id:
 
 Melihat data JSON by id:
 ![jsonbyid](./images/tugas3_jsonbyid.png)
+
 
 # Tugas Week 2
 

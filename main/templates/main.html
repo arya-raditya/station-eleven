@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<h4>Hai {{ user_name }}!!! Selamat datang di</h4>
 <h1>{{ shop_name }}</h1>
-<h5>Oleh {{ name }} dari kelas {{ class }}</h5>
+<h5>Oleh {{ student_name }} dari kelas {{ class }}</h5>
 <p>Produk termurah siap dikirim ke mana pun Anda berada!</p>
+
+<h5>Sesi terakhir login: {{ last_login }}</h5>
 
 {% if not product_list %}
 <p>Station Eleven masih melakukan restock!</p>
@@ -33,5 +36,11 @@
 <a href="{% url 'main:create_product_list' %}">
 <button>Add New Product</button>
 </a>
+
+<a href="{% url 'main:logout' %}">
+    <button>Logout</button>
+</a>
+
+<h5>Sesi terakhir login: {{ last_login }}</h5>
 
 {% endblock content %}
