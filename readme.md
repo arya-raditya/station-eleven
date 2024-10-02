@@ -1,3 +1,33 @@
+# Tugas Week 5
+
+## Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+
+Urutan prioritas dalam pengambilan CSS selector didasarkan pada specificity (spesifisitas), yang menentukan seberapa kuat sebuah selector berlaku pada elemen. Spesifisitas dihitung berdasarkan tipe selector yang digunakan. Selector inline style memiliki prioritas tertinggi, diikuti oleh selector ID (#id), lalu selector class, attribute, dan pseudo-class (.class, [attribute], :hover), dan terakhir adalah selector element/tag (div, p).
+
+Jika beberapa selector memiliki tingkat spesifisitas yang sama, maka aturan yang ditulis terakhir dalam kode CSS akan diterapkan (prinsip cascade). Sebagai contoh, selector #header akan lebih kuat daripada .nav-item, dan p akan kalah jika bersaing dengan .content p.
+
+## Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+
+Responsive design penting dalam pengembangan aplikasi web karena memungkinkan tampilan dan fungsi website beradaptasi dengan berbagai ukuran layar dan perangkat, seperti desktop, tablet, dan smartphone. Hal ini meningkatkan user experience dengan memastikan konten tetap mudah diakses, terbaca, dan digunakan tanpa perlu memperbesar atau menggulir secara horizontal. Mengingat banyaknya variasi perangkat yang digunakan pengguna, responsive design membantu meningkatkan aksesibilitas dan SEO, serta memaksimalkan jangkauan pengguna.
+
+Contoh aplikasi yang sudah menerapkan responsive design adalah Twitter, di mana tampilan dan fitur menyesuaikan dengan baik pada berbagai perangkat. Sebaliknya, contoh yang belum menerapkan responsive design adala SIAK NG, sehingga terdapat kesulitan untuk membaca tulisan melalui mobile.
+
+## Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+
+Margin, border, dan padding adalah tiga elemen penting dalam model kotak (box model) CSS yang mempengaruhi tata letak elemen di halaman web. Margin adalah ruang di luar elemen yang memisahkan elemen dari elemen lain di sekitarnya. Border adalah garis yang mengelilingi elemen, terletak di antara margin dan padding. Padding adalah ruang di dalam elemen, antara konten elemen dan border. Untuk mengimplementasikannya, dapat dengan menspecify apa yang mau diterapkan di dalam div, misal margin: 20px;
+
+## Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+
+Flexbox (Flexible Box Layout) adalah model tata letak CSS yang dirancang untuk menyusun elemen dalam satu dimensi, baik secara horizontal maupun vertikal. Dengan menggunakan flexbox, kita dapat dengan mudah mengatur ukuran, urutan, dan perataan elemen di dalam kontainer, membuatnya sangat berguna untuk membangun antarmuka responsif. Misalnya, flexbox memudahkan penataan elemen di toolbar, navigasi, atau kartu produk, di mana penyesuaian ruang antar elemen menjadi penting.
+
+Grid Layout, di sisi lain, adalah model tata letak dua dimensi yang memungkinkan pengaturan elemen dalam baris dan kolom. Dengan grid, kita dapat membagi kontainer menjadi area yang lebih kompleks dan mengatur elemen dalam pola yang lebih terstruktur. Grid sangat berguna untuk tata letak halaman yang lebih rumit, seperti halaman web dengan beberapa kolom atau tampilan galeri. Keduanya, flexbox dan grid, saling melengkapi dan dapat digunakan bersamaan untuk menciptakan desain yang lebih dinamis dan responsif.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+Dalam tugas kali ini, salah satu hal yang diinstruksikan adalah mengimplementasikan fitur edit dan delete. Untuk melakukannya, saya membuat fungsi edit_product dan delete_product di views.py terlebih dahulu. Fungsi edit_product membutuhkan halaman sendiri, sehingga perlu dibuatkan edit_product.html. Setelah mengimplementasinnya, saya melakukan routing ke urls.py.
+
+Selain itu, pada tugas kali ini juga diminta untuk melakukan styling menggunakan css. Terlebih dahulu, Tailwind perlu ditambahkan ke base.html dengan menambahkan < script src="https://cdn.tailwindcss.com" >. Dengan ini, saya merevamp tampilan login, register, dan main menjadi lebih menarik. Kemudian, produk perlu ditampilkan tidak lagi dalam bentuk tabel, melainkan card. Sehingga, saya menambahkan card_product.html sebagai template design card untuk setiap product yang nantinya dipanggil di main. Perlu juga ditambahkan navbar yang reponsif di desktop dan mobile, sehingga dalam pembuatan navbar, sehingga saya membuat class tambahan mobile-menu.
+
 # Tugas Week 4
 
 ## Apa perbedaan antara HttpResponseRedirect() dan redirect()
