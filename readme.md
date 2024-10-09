@@ -1,3 +1,28 @@
+# Tugas Week 6
+
+## Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+
+Penggunaan JavaScript dalam pengembangan aplikasi web sangat bermanfaat karena memungkinkan peningkatan interaktivitas dan performa melalui AJAX (Asynchronous JavaScript and XML), yang memungkinkan aplikasi web berkomunikasi dengan server di latar belakang tanpa memuat ulang halaman. Ini sangat penting untuk fitur real-time seperti pemuatan data dinamis, validasi formulir, atau pembaruan konten secara instan, memberikan pengalaman pengguna yang lebih lancar dan responsif. JavaScript juga terintegrasi dengan baik dengan HTML dan CSS, serta mendukung framework modern untuk membangun aplikasi web yang lebih efisien dan interaktif.
+
+## Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+
+Penggunaan await saat menggunakan fetch() berfungsi untuk menunggu sampai proses pengambilan data (fetching) selesai sebelum melanjutkan eksekusi kode berikutnya. fetch() mengembalikan sebuah Promise, dan dengan await, kita bisa menangkap hasilnya secara langsung setelah permintaan selesai, sehingga menghindari penulisan kode then/catch. Jika kita tidak menggunakan await, kode setelah fetch() akan dieksekusi segera, bahkan sebelum data dari Promise diterima, yang dapat menyebabkan hasil yang tidak diinginkan seperti variabel yang belum terisi dengan benar atau respons yang belum tersedia saat dibutuhkan.
+
+## Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+
+Kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST karena Django secara default mengaktifkan CSRF (Cross-Site Request Forgery) protection untuk semua permintaan POST. CSRF melindungi aplikasi dari serangan berbahaya dengan memverifikasi bahwa permintaan POST datang dari sumber yang tepercaya (misalnya dari form dalam aplikasi yang sama). Namun, ketika menggunakan AJAX POST, terutama dari sumber eksternal atau tanpa token CSRF yang valid, permintaan akan ditolak oleh Django. Dengan menambahkan csrf_exempt, kita secara eksplisit mengabaikan verifikasi CSRF untuk view tersebut, memungkinkan AJAX POST berjalan tanpa harus menyertakan token CSRF, meskipun ini bisa mengurangi keamanan jika tidak digunakan dengan hati-hati.
+
+## Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+
+Pembersihan data input pengguna sebaiknya dilakukan di backend, meskipun validasi juga bisa dilakukan di frontend, karena backend merupakan lapisan terakhir yang dapat memastikan integritas dan keamanan data sebelum disimpan atau diproses. Validasi di frontend bertujuan untuk memberikan pengalaman pengguna yang lebih responsif, tetapi tidak dapat diandalkan sepenuhnya karena bisa dilewati atau dimanipulasi, misalnya melalui alat pengembang browser atau serangan langsung ke API. Oleh karena itu, validasi di backend penting untuk mencegah data yang tidak valid, berbahaya, atau tidak sesuai masuk ke sistem, memastikan aplikasi tetap aman dan konsisten.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+Minggu ini, saya melakukan beberapa pengembangan. Pertama, saya menambahkan error message pada login, memastikan pengguna mendapatkan umpan balik yang jelas jika login gagal. Setelah itu, saya membuat fungsi untuk menambahkan mood dengan AJAX, dan menambahkan routing baru untuk mengarahkan fungsi add_mood_entry_ajax agar bisa dipanggil dari frontend.
+
+Selain itu, saya menampilkan data mood entry menggunakan fetch() API, memungkinkan pengambilan data secara dinamis. Saya juga membuat modal sebagai form untuk menambahkan mood baru, dan memastikan data bisa ditambahkan melalui AJAX tanpa perlu reload halaman. Untuk menjaga keamanan, saya melindungi aplikasi dari Cross Site Scripting (XSS) dengan membersihkan data input menggunakan DOMPurify, memastikan data yang ditampilkan aman dari serangan berbahaya.
+
+
 # Tugas Week 5
 
 ## Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!

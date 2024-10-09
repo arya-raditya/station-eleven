@@ -10,18 +10,19 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.utils.html import strip_tags
 
 # Tugas 2 - main
 @login_required(login_url='/login') # from tugas 4 - auth
 def show_main(request):
-    product_list = Product.objects.filter(user=request.user) # filter from tugas 4 - auth
     
     context = {
         'shop_name' : 'Station Eleven',
         'student_name' : 'Arya Raditya Kusuma',
         'class' : 'PBP F',
         'user_name': request.user.username, # from tugas 4 - auth
-        'product_list': product_list, # from tugas 3 - forms
         'last_login': request.COOKIES['last_login'], # from tugas 4 - auth
     }
 
@@ -49,11 +50,11 @@ def show_json(request):
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
-    data = Product.objects.filter(pk=id)
+    data = Product.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json_by_id(request, id):
-    data = Product.objects.filter(pk=id)
+    data = Product.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 # Tugas 4 - auth
@@ -71,17 +72,19 @@ def register(request):
 
 def login_user(request):
    if request.method == 'POST':
-      form = AuthenticationForm(data=request.POST)
+        form = AuthenticationForm(data=request.POST)
 
-      if form.is_valid():
-        user = form.get_user()
-        login(request, user)
-        response = HttpResponseRedirect(reverse("main:show_main"))
-        response.set_cookie('last_login', str(datetime.datetime.now()))
-        return response
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            response = HttpResponseRedirect(reverse("main:show_main"))
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            messages.error(request, "Invalid username or password. Please try again.")
 
    else:
-      form = AuthenticationForm(request)
+        form = AuthenticationForm(request)
    context = {'form': form}
    return render(request, 'login.html', context)
 
@@ -107,3 +110,23 @@ def delete_product(request, id):
     product = Product.objects.get(pk = id)
     product.delete()
     return HttpResponseRedirect(reverse('main:show_main'))
+
+# Tugas 6 - AJAX
+
+@csrf_exempt
+@require_POST
+def add_product_list_ajax(request):
+    name = strip_tags(request.POST.get("name"))
+    price = request.POST.get("price")
+    description = strip_tags(request.POST.get("description"))
+    stock = request.POST.get("stock")
+    user = request.user
+
+    new_product = Product(
+        name=name, price=price,
+        description=description, stock=stock,
+        user=user
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
